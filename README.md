@@ -2,7 +2,7 @@
 
 The purpose of this project is simple: **to build a CPU**.
 
-Now you might be thinking, a CPU as a first-year college student — are you crazy?
+Now you might be thinking, a CPU as a first-year college student, are you crazy?
 Maybe. But trying something difficult is one of the best ways to learn, and honestly, it doesn't hurt to try.
 
 Before writing any code, I first had to decide **which architecture to use**. After reading about different options and talking with a few professors, I decided to go with **RISC-V**. It’s open, well documented, and widely used for learning processor design.
