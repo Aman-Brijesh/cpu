@@ -1,7 +1,7 @@
 module alu(
     input logic [31:0] A,
     input logic [31:0] B,
-    input logic [3:0] M_control,
+    input logic [4:0] M_control,
     output logic [31:0] Result,
     output logic Cout,
     output logic V
@@ -11,7 +11,7 @@ logic [31:0] P;
 logic [31:0] G;
 logic [32:0] C;
 logic Sub; 
-assign Sub = (M_control == 4'b0001);
+assign Sub = (M_control == 5'b00001);
 
 logic [31:0] B_sub;
 assign B_sub = B^{32{Sub}};
@@ -37,16 +37,16 @@ assign sum = P^C[31:0];
 //Mux
 always_comb begin
     case (M_control)
-        4'b0000: Result = sum;//add
-        4'b0001: Result = sum;//sub
-        4'b0010: Result = A&B;//and
-        4'b0011: Result = A|B;//or
-        4'b0100: Result = A^B;//XOR
-        4'b0101: Result = A<<B;//SLL
-        4'b0110: Result = A>>B;//SRL
-        4'b0111: Result = $signed(A)>>>B;//SRA
-        4'b1000: Result = $signed(A)<$signed(B);//SLT
-        4'b1001: Result = A<B;//SLTU
+        5'b00000: Result = sum;//add
+        5'b00001: Result = sum;//sub
+        5'b00010: Result = A&B;//and
+        5'b00011: Result = A|B;//or
+        5'b00100: Result = A^B;//XOR
+        5'b00101: Result = A<<B;//SLL
+        5'b00110: Result = A>>B;//SRL
+        5'b00111: Result = $signed(A)>>>B;//SRA
+        5'b01000: Result = $signed(A)<$signed(B);//SLT
+        5'b01001: Result = A<B;//SLTU
 
         default: Result = 32'b0;
     endcase

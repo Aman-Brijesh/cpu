@@ -6,7 +6,7 @@ module cpu_core(
     logic [31:0] reg1_data;
     logic [31:0] reg2_data;
 
-    logic [3:0] alu_op_connect;
+    logic [4:0] alu_op_connect;
     logic write_enable = 1'b1;
 
     instruction_decoder my_decoder(
