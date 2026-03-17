@@ -21,9 +21,9 @@ assign P = A^B_sub;
 
 
 //Sum
-always_comb begin
+always @* begin
     C[0] = Sub;
-    for(int i = 0; i<32; i++) begin
+    for(integer i = 0; i<32; i++) begin
         C[i+1] = G[i] | (P[i]&C[i]);
     end    
     Cout = C[32];

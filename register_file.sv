@@ -11,6 +11,11 @@ module register_file(
 
 logic [31:0] memory_array [31:0];
 
+initial begin
+    for (int i = 0; i < 32; i++)
+        memory_array[i] = 32'b0;
+end
+
 assign rd1 = (rs1 == 5'b00000)?32'b0:memory_array[rs1];
 assign rd2 = (rs2 == 5'b00000)?32'b0:memory_array[rs2];
 

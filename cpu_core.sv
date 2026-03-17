@@ -1,6 +1,6 @@
 module cpu_core(
     input logic clk,
-    input logic [31:0] instruction_in,
+    input logic rst,
     output logic [31:0] final_result
 );
     logic [31:0] reg1_data;
@@ -9,23 +9,43 @@ module cpu_core(
     logic [4:0] alu_op_connect;
     logic write_enable = 1'b1;
 
+    logic [31:0] pc;
+    logic [31:0] instruction;
+
+    //program counter
+    pc my_pc(
+        .clk(clk),
+        .rst(rst),
+        .pc(pc)
+    );
+
+    //instruction memory
+    instruction_memory my_instruction_memory(
+        .pc(pc),
+        .instruction_out(instruction)
+    );
+    
+    //decoder
     instruction_decoder my_decoder(
-        .opcode(instruction_in[6:0]),
-        .funct3(instruction_in[14:12]),
-        .funct7(instruction_in[31:25]),
+        .opcode(instruction[6:0]),
+        .funct3(instruction[14:12]),
+        .funct7(instruction[31:25]),
         .alu_op(alu_op_connect)
     );
+
+    //register file
     register_file my_register_file(
         .clk(clk),
         .we(write_enable),
-        .rs1(instruction_in[19:15]),
-        .rs2(instruction_in[24:20]),
-        .rd(instruction_in[11:7]),
+        .rs1(instruction[19:15]),
+        .rs2(instruction[24:20]),
+        .rd(instruction[11:7]),
         .wd(final_result),
         .rd1(reg1_data),
         .rd2(reg2_data)
     );
 
+    //alu
     alu my_alu(
         .A(reg1_data),
         .B(reg2_data),
