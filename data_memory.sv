@@ -13,11 +13,12 @@ module data_memory(
         if(memWrite)
             memory[address[9:2]]<=write_data;
     end
+
     always_comb begin
         if(memRead)
             read_data = memory[address[9:2]];
         else
-            read_data = 32'b0;  
+            read_data = 32'b0;
     end
 
 
